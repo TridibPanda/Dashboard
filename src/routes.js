@@ -20,6 +20,7 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import EmailIcon from '@material-ui/icons/Email';
+
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import Users from "views/Users/Users";

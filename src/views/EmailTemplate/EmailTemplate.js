@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 // @material-ui/core components
 import EmailIcon from '@material-ui/icons/Email';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -19,7 +20,6 @@ import CKEditor from "ckeditor4-react";
 
 
 function EmailTemplate(props) {
-  // const addEmailData = props.addEmailData;
 
   useEffect(() => {
     let login = window.localStorage.getItem("loggedin");
@@ -28,7 +28,7 @@ function EmailTemplate(props) {
     }
   }, []);
 
-  
+
   return (
     <>
       <GridContainer >
@@ -52,8 +52,8 @@ function EmailTemplate(props) {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    // onChangeValue={props.handleChange}
-                    // value={addEmailData.emailTitle}
+                    // onChangeValue={}
+                    // value={}
                     labelText="To"
                     type="text"
                     id="to"
@@ -65,8 +65,8 @@ function EmailTemplate(props) {
                 </GridItem>
                 <GridItem xs={6} sm={6} md={6}>
                   <CustomInput
-                    // onChangeValue={props.handleChange}
-                    //value={addEmailData.emailSubject}
+                    // onChangeValue={}
+                    //value={}
                     labelText="Subject"
                     type="text"
                     id="Subject"
@@ -83,8 +83,8 @@ function EmailTemplate(props) {
                     onBeforeLoad={CKEDITOR =>
                       (CKEDITOR.disableAutoInline = true)
                     }
-                  // data={addEmailData.emailContent}
-                  //onChange={e => props.updateEmailContent(e.editor.getData())}
+                  // data={}
+                  //onChange={e => console.log(e.editor.getData())}
                   />
                 </GridItem>
               </GridContainer>
