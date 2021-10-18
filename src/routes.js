@@ -25,6 +25,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import Users from "views/Users/Users";
 import AddList from "views/AddList/AddList";
+import Chart from "views/AddList/Chart";
 import EmailTemplate from "views/EmailTemplate/EmailTemplate";
 import UserProfile from "views/UserProfile/UserProfile.js";
 
@@ -48,6 +49,13 @@ const dashboardRoutes = [
     name: "Add List",
     icon: ListAltIcon,
     component: AddList,
+    layout: "/admin",
+  },
+  {
+    path: "/chart",
+    name: "Chart",
+    icon: ListAltIcon,
+    component: Chart,
     layout: "/admin",
   },
   {
