@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Bar, Pie, Doughnut, PolarArea } from 'react-chartjs-2';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -9,14 +12,19 @@ import { Button } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import GetAppIcon from '@material-ui/icons/GetApp';
+import Tooltip from '@material-ui/core/Tooltip';
+
 // @material-ui/icons
 import DateRange from "@material-ui/icons/DateRange";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import Accessibility from "@material-ui/icons/Accessibility";
 import UpdateIcon from "@material-ui/icons/Update";
+import IconButton from '@material-ui/core/IconButton';
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 import PageviewIcon from "@material-ui/icons/Pageview";
 import SpeakerNotesOffIcon from "@material-ui/icons/SpeakerNotesOff";
+
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -170,12 +178,29 @@ export default function Dashboard(props) {
       setNewUsers(filterValue == 7 ? 320 : 1071);;
     }
 
-  }
+  };
+
+  const exportTopdf = () => {
+    html2canvas(document.querySelector("#capture"),{
+      windowHeight: "100%",
+      windowWidth: "100%",
+    }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, 'PNG', 0, 0);
+      pdf.save("Dashboard.pdf");
+    });
+  };
 
   return (
     <>
       <Navbar routes={routes} handleDrawerToggle={handleDrawerToggle} />
-      <div>
+      <Tooltip title="Export to PDF" onClick={exportTopdf}>
+        <IconButton aria-label="Download">
+          <GetAppIcon style={{ color: "#03b6fc" }} />
+        </IconButton>
+      </Tooltip>
+      <div id="capture">
         <GridContainer>
           <GridItem xs={12} sm={6} md={3}>
             <Card>

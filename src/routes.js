@@ -65,13 +65,14 @@ const dashboardRoutes = [
     component: EmailTemplate,
     layout: "/admin",
   },
-  // {
-  //   path: "/userprofile",
-  //   name: "User Profile",
-  //   icon: Person,
-  //   component: UserProfile,
-  //   layout: "/admin"
-  // }
+  {
+    path: "/userprofile",
+    name: "User Profile",
+    icon: Person,
+    component: UserProfile,
+    layout: "/admin"
+  },
+  
 ];
 
 export default dashboardRoutes;

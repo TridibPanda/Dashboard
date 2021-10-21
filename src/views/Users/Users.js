@@ -21,6 +21,7 @@ import Table from "components/Table/Table.js";
 import defaultUser from "assets/img/default-user.png";
 // import { db } from "components/url";
 import XLSX from 'xlsx';
+import jsPDF from 'jspdf';
 
 const styles = {
   SmallIcon: {
@@ -76,7 +77,7 @@ function Users(props) {
       email: 'tridib@gmail.com',
       phone: '9875627840',
       timeStamp: '10/10/2021',
-      description: 'Hi,how are you?'
+      description: 'Hi,how are you? Hi,how are you? Hi,how are you?\n Hi,how are you? Hi,how are you? Hi,how are you? Hi,how are you?\n Hi,how are you? Hi,how are you? Hi,how are you? Hi,how are you?'
     },
     {
       image: '',
@@ -373,6 +374,13 @@ function Users(props) {
     setExcelData(list);
   };
 
+  const exportTopdf = () => {
+    const doc = new jsPDF();
+    
+    doc.text(description, 10,10);
+    doc.save("Descriptions.pdf");
+  };
+
   return (
     <>
       <div>
@@ -383,7 +391,7 @@ function Users(props) {
                 <CardHeader color="info">
                   <div style={{ display: "flex", }}>
                     <h3 className={classes.cardTitleWhite}>Descriptions</h3>
-                    <GridContainer style={{ paddingLeft: "45%", }}>
+                    <GridContainer style={{ paddingLeft: "40%", }}>
                       <GridItem xs={12} sm={12} md={7}>
                         <Button
                           variant="contained"
@@ -393,6 +401,15 @@ function Users(props) {
                         >
                           Speak
                         </Button>
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer style={{ paddingLeft: "3%" }}>
+                      <GridItem xs={12} sm={12} md={7}>
+                        <Tooltip title="Export to PDF" onClick={exportTopdf}>
+                          <IconButton aria-label="Download">
+                            <GetAppIcon style={{ color: "white" }} />
+                          </IconButton>
+                        </Tooltip>
                       </GridItem>
                     </GridContainer>
                     <GridContainer style={{ paddingLeft: "3%" }}>
