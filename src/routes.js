@@ -19,6 +19,8 @@
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EmailIcon from '@material-ui/icons/Email';
 
 // core components/views for Admin layout
@@ -26,6 +28,7 @@ import DashboardPage from "views/Dashboard/Dashboard.js";
 import Users from "views/Users/Users";
 import AddList from "views/AddList/AddList";
 import Chart from "views/AddList/Chart";
+import GeoLocation from "views/AddList/GeoLocation";
 import EmailTemplate from "views/EmailTemplate/EmailTemplate";
 import UserProfile from "views/UserProfile/UserProfile.js";
 
@@ -54,8 +57,15 @@ const dashboardRoutes = [
   {
     path: "/chart",
     name: "Chart",
-    icon: ListAltIcon,
+    icon: BarChartIcon,
     component: Chart,
+    layout: "/admin",
+  },
+  {
+    path: "/GeoLocation",
+    name: "Geo Location",
+    icon: LocationOnIcon,
+    component: GeoLocation,
     layout: "/admin",
   },
   {

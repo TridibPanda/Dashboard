@@ -1,27 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { Bar } from 'react-chartjs-2';
 
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
-import Table from "components/Table/Table.js";
-import XLSX from 'xlsx';
 
-const EXTENSIONS = ['xlsx', 'xls', 'csv'];
 
 function Chart(props) {
-
-  const [list, setList] = useState([]);
-  const [headers, setHeaders] = useState([]);
-
-  // Extensions
-  const getExention = (file) => {
-    const parts = file.name.split('.');
-    const extension = parts[parts.length - 1];
-    return EXTENSIONS.includes(extension); // return boolean
-  };
 
   useEffect(() => {
     let login = window.localStorage.getItem("loggedin");
@@ -30,64 +16,47 @@ function Chart(props) {
     }
   }, []);
 
-  const importExcel = (e) => {
-    const file = e.target.files[0];
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          stacked: true,
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+      xAxes: [
+        {
+          stacked: true,
+        },
+      ],
+    },
+  };
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      //parse data
-
-      const bstr = event.target.result;
-      const workBook = XLSX.read(bstr, { type: "binary" });
-
-      //get first sheet
-      const workSheetName = workBook.SheetNames[0];
-      const workSheet = workBook.Sheets[workSheetName];
-
-      //convert to array
-      const fileData = XLSX.utils.sheet_to_txt(workSheet, { header: 1 });
-      // console.log(fileData)
-
-      //Headers
-      const headers = fileData[0];
-      setHeaders(headers);
-
-      //removing header
-      fileData.splice(0, 1);
-      setList(fileData);
-
-    };
-
-    if (file && getExention(file)) {
-      reader.readAsBinaryString(file);
-    }
-    else {
-      setList([]);
-      setHeaders([]);
-    }
+  const data = {
+    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15','16','17','18','19','20','21','22','23','24','25','26','27','28'],
+    datasets: [
+      {
+        label: 'Posts',
+        data: [2, 3, 20, 5, 1, 4, 4, 8, 70, 100, 11, 45, 85, 45, 79,44,78,5,12,25,3,18,9,23,11,20,14,7],
+        backgroundColor: 'rgb(54, 162, 235)',
+      },
+      {
+        label: 'Videos',
+        data: [3, 10, 13, 15, 22, 30, 4, 8, 70, 10, 11, 25, 85, 45, 79,6,9,7,3,10,4,8,3,1,0,12,0,2],
+        backgroundColor: 'rgb(16, 175, 18)',
+      },
+    ],
   };
 
   return (
     <>
+    <text>Chart</text>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            <CardHeader color="info">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <input type="file" style={{ fontSize: 15 }} onChange={importExcel} />
-              </div>
-            </CardHeader>
-            <CardBody>
-              {list.length ? <Table
-                tableHeaderColor="info"
-                tableHead={headers}
-                tableData={list}
-              /> :
-                <div style={{ justifyContent: "center", alignItems: "center" }}>
-                  <h3>Select Excel, CSV file</h3>
-                </div>
-              }
-            </CardBody>
+          <Bar data={data} options={options} />
           </Card>
         </GridItem>
       </GridContainer>
